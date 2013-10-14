@@ -43,6 +43,10 @@
 @navigation-li-a-text-decoration: none;
 @navigation-li-a-hover-background: url('../images/triangle.gif') no-repeat center top;
 
+// Content
+@content-width: 890px;
+@content-margin: 10px 0 0 0;
+
 html {
   width: 100%;
   body {
@@ -151,8 +155,8 @@ html {
       }
 
       #content {
-        width: 890px;
-        margin: 10px 0 45px 0;
+        width: @content-width;
+        margin: @content-margin;
       }
     }
   }
