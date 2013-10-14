@@ -1,0 +1,45 @@
+// Page Title
+@page-title-background-color: #F5F9FA;
+@page-title-text-align: center;
+
+// Box
+@box-border-width: 170px;
+@box-border-margin: 30px;
+@box-width: auto;
+@box-margin: 5px;
+@box-border: 1px solid #C4C7C8;
+@box-title-padding: 5px;
+@box-background-color: #C4C7C8;
+@box-height: 25px;
+@box-text-align: center;
+@box-p-padding: 10px;
+
+#left {
+  .page-title {
+    background-color: @page-title-background-color;
+    text-align: @page-title-text-align;
+  }
+
+  #box-top {
+    .box-border {
+      width: @box-border-width;
+      margin: @box-border-margin;
+      border: @box-border;
+      cursor: pointer;
+      .box-lottery {
+        width: @box-width;
+        margin: @box-margin;
+        border: @box-border;
+        .box-title {
+          padding: @box-title-padding;
+          background-color: @box-background-color;
+          height: @box-height;
+          text-align: @box-text-align;
+        }
+        p {
+          padding: @box-p-padding;
+        }
+      }
+    }
+  }
+}
