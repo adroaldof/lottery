@@ -2,6 +2,10 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 
+class Files(models.Model):
+    file = models.FileField(upload_to='megasena/')
+
+
 class Concourse(models.Model):
     number = models.IntegerField()
 
