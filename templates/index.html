@@ -24,11 +24,13 @@
     <h1>{% trans "Check your lottery" %}</h1>
   </div>
   <div id="box-top">
-    <div class="box-lottery" data-address="{% url 'mega-home' %}">
-      <div class="box-title">
-        <h4>{% trans "Mega-Sena" %}</h4>
+    <div class="box-border">
+      <div class="box-lottery" data-address="{% url 'megasena-home' %}">
+        <div class="box-title">
+          <h4>{% trans "Mega-Sena" %}</h4>
+        </div>
+        <p>{% trans "The most famous Brazilian lottery" %}</p>
       </div>
-      <p>{% trans "The most famous Brazilian lottery" %}</p>
     </div>
   </div>
 </div>
