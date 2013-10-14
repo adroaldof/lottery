@@ -2,30 +2,34 @@
 {% load staticfiles %}
 {% load i18n %}
 
-{% block title %}MegaSena{% endblock title %}
+{% block extrastyles %}
+  <link type="text/css" rel="stylesheet/less" href="{% static 'css/index.less' %}" />
+{% endblock extrastyles %}
+
+{% block extrascripts %}
+<script type="text/javascript" charset="utf-8">
+  $(function() {
+    $('.box-lottery').on('click', function() {
+      window.location.href = $(this).data('address');
+    });
+  });
+</script>
+{% endblock extrascripts %}
+
+{% block title %}Mega-Sena{% endblock title %}
 
 {% block content %}
 <div id='left'>
-  <div id="destak-top">
+  <div class="page-title">
     <h1>{% trans "Check your lottery" %}</h1>
-    <article>
-      <div class="box-lottery">
-        <a href="{% url 'mega-home' %}"><div class="main-button"><h3>{% trans "Six" %}</h3></div></a>
+  </div>
+  <div id="box-top">
+    <div class="box-lottery" data-address="{% url 'mega-home' %}">
+      <div class="box-title">
+        <h4>{% trans "Mega-Sena" %}</h4>
       </div>
-    </article>
+      <p>{% trans "The most famous Brazilian lottery" %}</p>
+    </div>
   </div>
-  <div id="destak-bottom">
-    <article>
-    </article>
-  </div>
-</div>
-
-<div id='right'>
-  <article>
-  </article>
-  <article>
-  </article>
-  <article>
-  </article>
 </div>
 {% endblock content %}
