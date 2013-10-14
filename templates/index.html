@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block extrastyles %}
+  <link type="text/css" rel="stylesheet/less" href="{% static 'css/index.less' %}" />
+{% endblock extrastyles %}
+
+{% block extrascripts %}
+<script type="text/javascript" charset="utf-8">
+  $(function() {
+    $('.box-lottery').on('click', function() {
+      window.location.href = $(this).data('address');
+    });
+  });
+</script>
+{% endblock extrascripts %}
+
+{% block title %}Mega-Sena{% endblock title %}
+
+{% block content %}
+<div id='left'>
+  <div class="page-title">
+    <h1>{% trans "Check your lottery" %}</h1>
+  </div>
+  <div id="box-top">
+    <div class="box-lottery" data-address="{% url 'mega-home' %}">
+      <div class="box-title">
+        <h4>{% trans "Mega-Sena" %}</h4>
+      </div>
+      <p>{% trans "The most famous Brazilian lottery" %}</p>
+    </div>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,39 @@
+{% load staticfiles %}
+{% load i18n %}
+<!DOCTYPE html>
+{% block head %}
+  <meta content="charset=utf-8" />
+  <title>{% block title %}ToDo{% endblock %}</title>
+  {% block style %}
+  <link type="text/css" rel="stylesheet" href="{% static 'css/reset.css' %}" />
+  <link type="text/css" rel="stylesheet/less" href="{% static 'css/default.less' %}" />
+  {% block extrastyles %}{% endblock extrastyles %}{% endblock style %}
+  {% block scripts %}
+  <script type="text/javascript" src="{% static 'js/jquery-2.0.3.js' %}" ></script>
+  <script type="text/javascript" src="{% static 'js/less-1.4.1.min.js' %}" ></script>
+  {% block extrascripts %}{% endblock extrascripts %}
+  {% endblock scripts %}
+{% endblock head %}
+
+{% block body %}
+<div id="wrapper">
+
+  <header>
+    {% block header %}
+      <div id="logo">
+        <h1>ToDo</h1>
+      </div>
+      <ul id="navigation" class="nav_hint">
+        <li><a href="{% url 'mega-home' %}"><span class="subheading">{% trans "Last Raffled Games" %}</span><br />{% trans "Last Games" %}</a></li>
+        <li><a href="{% url 'index' %}"><span class="subheading">{% trans "Home Page" %}</span><br />{% trans "Index" %}</a></li>
+      </ul>
+    {% endblock header %}
+  </header>
+
+
+  <div id="content">
+    {% block content %}
+    {% endblock content %}
+  </div>
+</div>
+{% endblock body %}

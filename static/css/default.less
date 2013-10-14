@@ -1,0 +1,164 @@
+// Body
+@body-font-family: 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Arial, 'san-serif';
+@body-font-size: 12px;
+@body-font-color: #000;
+@body-background-image: url('../images/bg.png');
+@body-background-color: #F5F9FA;
+
+// Links
+@link-font-size: 1em;
+@link-color: #000;
+@link-text-decoration: underline;
+@link-text-decoration-hover: none;
+
+// Wrapper
+@wrapper-width: 900px;
+@wrapper-margin: 0 auto;
+
+// Header
+@header-width: 890px;
+@header-height: 70px;
+@header-margin: 0;
+@header-padding: 0 0 5px 0;
+@header-background-color: #F5F9FA;
+@header-logo-width: 200px;
+@header-logo-margin: 15px 0 0 0;
+@header-logo-float: left;
+
+// Navigation
+@navigation-float: left;
+@navigation-text-transform: uppercase;
+@navigation-subheading-font-size: 10px;
+@navigation-subheading-line-height: 16px;
+@navigation-subheading-color: #757A7C !important;
+@navigation-li-display: inline;
+@navigation-li-float: right;
+@navigation-li-margin: 0 0 0 15px;
+@navigation-li-a-display: block;
+@navigation-li-a-padding: 24px 0 0 0;
+@navigation-li-a-font-family: arial, 'sans-serif' !important;
+@navigation-li-a-font-size: 1.1em;
+@navigation-li-a-font-weight: bold;
+@navigation-li-a-color: #000;
+@navigation-li-a-text-decoration: none;
+@navigation-li-a-hover-background: url('../images/triangle.gif') no-repeat center top;
+
+// Content
+@content-width: 890px;
+@content-margin: 10px 0 0 0;
+
+html {
+  width: 100%;
+  body {
+    font-family: @body-font-family;
+    font-size: @body-font-size;
+    color: @body-font-color;
+    background-image: @body-background-image;
+    background-color: @body-background-color;
+
+    h1 {
+      font-size: 2.5em;
+      font-weight: bold;
+    }
+
+    h2 {
+      font-size: 2.3em;
+      font-weight: bold;
+    }
+
+    h3 {
+      font-size: 2.1em;
+      font-weight: bold;
+    }
+
+    h4 {
+      font-size: 1.8em;
+      font-weight: bold;
+    }
+
+    h5 {
+      font-size: 1.6em;
+      font-weight: bold;
+    }
+
+    h6 {
+      font-size: 1.3em;
+      font-weight: bold;
+    }
+
+    p {
+      margin: 0 0 5px 0;
+    }
+
+    a {
+      &:link, &:visited, &:active {
+        font-size: @link-font-size;
+        color: @link-color;
+        text-decoration: @link-text-decoration;
+      }
+      &:hover {
+        text-decoration: @link-text-decoration-hover;
+      }
+    }
+
+    #wrapper {
+      width: @wrapper-width;
+      margin: @wrapper-margin;
+
+      header {
+        width: @header-width;
+        height: @header-height;
+        margin: @header-margin;
+        padding: @header-padding;
+        background-color: @header-background-color;
+
+        #logo {
+          width: @header-logo-width;
+          margin: @header-logo-margin;
+          float: @header-logo-float;
+          h1 {
+            font-size: 3em;
+            font-weight: normal;
+          }
+        }
+
+        #navigation {
+          float: @navigation-float;
+          text-transform: @navigation-text-transform;
+          .subheading {
+            font-size: @navigation-subheading-font-size;
+            font-weight: normal;
+            line-height: @navigation-subheading-line-height;
+            color: @navigation-subheading-color;
+            text-shadow: none;
+            text-transform: none;
+          }
+          li {
+            display: @navigation-li-display;
+            float: @navigation-li-float;
+            margin: @navigation-li-margin;
+            a {
+              display: @navigation-li-a-display;
+              padding: @navigation-li-a-padding;
+              font-family: @navigation-li-a-font-family;
+              font-size: @navigation-li-a-font-size;
+              font-weight: @navigation-li-a-font-weight;
+              color: @navigation-li-a-color;
+              text-decoration: @navigation-li-a-text-decoration;
+              &:hover,
+              &.current {
+                background: @navigation-li-a-hover-background;
+              }
+            }
+          }
+        }
+      }
+
+      #content {
+        width: @content-width;
+        margin: @content-margin;
+      }
+    }
+  }
+}
+
