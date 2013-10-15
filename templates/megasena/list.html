@@ -11,19 +11,20 @@
 
 {% block extrascripts %}
   <script type="text/javascript">
-  $(function(){
-    $('.close').on('click', function(){
-      $(this).parent().removeClass('active').remove();
+    $(function(){
+      $('.close').on('click', function(){
+        $(this).parent().removeClass('active').remove();
+      });
+
+      $('.remove').on('click', function() {
+        message = 'Are you sure that you want to delete this item?';
+        if (confirm(message)) {
+          $.get($(this).data('remove')).done(function() {
+            window.location.reload();
+          });
+        }
+      });
     });
-    $('.action-btn.remove').on('click', function() {
-      message = 'Are you sure that you want to delete this item?';
-      if (confirm(message)) {
-        $.get($(this).data('remove')).done(function() {
-          window.location.reload();
-        });
-      }
-    });
-  });
   </script>
 {% endblock extrascripts %}
 
@@ -52,6 +53,7 @@
         <th>4&ordm</th>
         <th>5&ordm</th>
         <th>6&ordm</th>
+        <th></th>
         <th>
           <a href="{% url 'megasena-add-bet' %}" class="action-btn">&</a>
         </th>
@@ -66,13 +68,18 @@
       <td>{{ bet.n04 }}</td>
       <td>{{ bet.n05 }}</td>
       <td>{{ bet.n06 }}</td>
-      <td><a href="{% url 'megasena-update-bet' bet.number.number %}" class="action-btn update">p</td>
+      <td>
+        <a href="{% url 'megasena-update-bet' bet.number.number %}" class="action-btn update">p</a>
+      </td>
+      <td>
+        <a href="#" class="action-btn remove" data-remove="{% url 'megasena-delete-bet' bet.id %}">#</a>
+      </td>
     </tr>
     {% endfor %}
     </tbody>
     <tfoot>
       <tr>
-        <td colspan="13">{% trans "List of your great bets" %}</td>
+        <td colspan="9">{% trans "List of your great bets" %}</td>
       </tr>
     </tfoot>
   </table>

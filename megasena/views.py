@@ -59,7 +59,7 @@ def add(request):
                 form.number = concourse
                 form.save()
             messages.add_message(
-                request, messages.INFO, _('Game was successfully added.')
+                request, messages.INFO, _('Bet was successfully added')
             )
             return HttpResponseRedirect('/megasena/list')
 
@@ -81,7 +81,7 @@ def update(request, number):
         if formset.is_valid():
             formset.save()
             messages.add_message(
-                request, messages.INFO, _('Game was successfully updated.')
+                request, messages.INFO, _('Bet was successfully updated')
             )
             return HttpResponseRedirect('/megasena/list')
 
@@ -93,3 +93,12 @@ def update(request, number):
     args['operation'] = _("Update Game")
 
     return TemplateResponse(request, 'megasena/form.html', args)
+
+
+def delete(request, pk):
+    bet = get_object_or_404(Bet, id=pk)
+
+    if bet:
+        bet.delete()
+        messages.add_message(request, messages.INFO, _('Bet was sucessfully deleted'))
+        return HttpResponseRedirect('/megasena/list')
