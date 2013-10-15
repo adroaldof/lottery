@@ -1,0 +1,67 @@
+// Table
+@table-width: 100%;
+@table-font-family: 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Arial, san-serif;
+@table-head-background-color: #C4C7C8;
+@table-description-background-color: #E6E8E9;
+
+// borders
+@border-radius: 3px;
+@border-color: #C4C7C8;
+@border-description: 1px solid @border-color;
+
+
+table {
+  width: @table-width;
+  font-family: @table-font-family;
+  text-align: center;
+  border: @border-description;
+  .border-radius(@border-radius);
+
+  tbody tr:hover td {
+    color: #339;
+    background: #F5F9FA;
+  }
+
+  thead {
+    border-right: @border-description;
+  }
+
+  th {
+    padding: 8px;
+    font-size: 14px;
+    font-weight: bolder;
+    background: @table-head-background-color;
+    border-right: @border-description;
+    border-bottom: @border-description;
+    line-height: 35px;
+  }
+
+  td {
+    padding: 8px;
+    background: @table-description-background-color;
+    border-bottom: @border-description;
+    text-align: center;
+  }
+
+  td:nth-child(1), td:nth-child(7), td:nth-child(9) {
+    border-right: 1px dashed @border-color;
+  }
+
+  td:last-of-type {
+    border-right: @border-description;
+  }
+
+  tfoot {
+    width: 100%;
+    tr td {
+      font-size: 12px;
+      background: @table-head-background-color;
+    }
+  }
+}
+
+.border-radius (@radius: 5px) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  border-radius: @radius;
+}
