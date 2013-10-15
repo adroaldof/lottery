@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block extrastyles %}
+  <link type="text/css" rel="stylesheet/less" href="{% static 'css/tables.less' %}" />
+  <link type="text/css" rel="stylesheet/less" href="{% static 'css/home.less' %}" />
+  <link type="text/css" rel="stylesheet/less" href="{% static 'css/messages.less' %}" />
+{% endblock extrastyles %}
+
+{% block extrascripts %}
+  <script type="text/javascript">
+  $(function(){
+    $('.close').on('click', function(){
+      $(this).parent().removeClass('active').remove();
+    });
+  });
+  </script>
+{% endblock extrascripts %}
+
+{% block content %}
+{% if messages %}
+<div class="messages {% if messages %}active{% endif %}">
+  <ul>
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+  </ul>
+  <span class="close"><p>D</p></span>
+</div>
+{% endif %}
+
+{% if raffles %}
+<div class="box-border">
+  <table>
+    <thead>
+      <tr>
+        <th>{% trans "Concourse" %}</th>
+        <th>1&ordm</th>
+        <th>2&ordm</th>
+        <th>3&ordm</th>
+        <th>4&ordm</th>
+        <th>5&ordm</th>
+        <th>6&ordm</th>
+        <th>{% trans "Prize" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for raffle in raffles %}
+    <tr>
+      <td><a href="{% url 'megasena-detail' raffle.number.number %}">{{ raffle.number }}</a></td>
+      <td>{{ raffle.n01 }}</td>
+      <td>{{ raffle.n02 }}</td>
+      <td>{{ raffle.n03 }}</td>
+      <td>{{ raffle.n04 }}</td>
+      <td>{{ raffle.n05 }}</td>
+      <td>{{ raffle.n06 }}</td>
+      <td>{{ raffle.sena_share }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="11">{% trans "List of last lottery games" %}</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+{% else %}
+<div class="box-border">
+  <div class="no-data">
+    <div class="title">
+      <h3>{% trans "You haven't synced MegaSena list" %}</h3>
+    </div>
+    <div class="texts">
+      <p>{% trans "Click" %} <a href="{% url 'parse-megasena' %}" alt="Check">{% trans "here" %}</a> {% trans "to update MegaSena concourses" %}.</p>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock content %}
