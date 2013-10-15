@@ -1,0 +1,61 @@
+// borders
+@border-radius: 3px;
+@border-color: #C4C7C8;
+
+// boxes
+@box-title-background-color: #C4C7C8;
+@box-content-background-color: #E6E8E9;
+@box-width: 360px;
+@box-min-height: 25px;
+
+// Texts
+@title-text-color: #000000;
+@label-text-color: #000000;
+@text-padding: 6px;
+
+#content {
+  margin: 5px auto 5px auto;
+  display: table;
+  width: 765px;
+  #content-left, #content-right {
+    float: left;
+    .game {
+      width: @box-width;
+      .default-spacing;
+      border: 1px solid @border-color;
+      .border-radius(@border-radius);
+    }
+
+    .info-box {
+      .info {
+        width: @box-width;
+        .default-spacing;
+        border: 1px solid @border-color;
+        .border-radius(@border-radius);
+        h3 {
+          margin: 0;
+          padding: 5px;
+          background-color: @box-title-background-color;
+          line-height: @box-min-height;
+        }
+        p {
+          margin: 0;
+          padding: 5px;
+          background-color: @box-content-background-color;
+          line-height: @box-min-height;
+        }
+      }
+    }
+  }
+}
+
+.default-spacing () {
+  margin: 5px;
+  padding: 5px;
+}
+
+.border-radius (@radius: 5px) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  border-radius: @radius;
+}

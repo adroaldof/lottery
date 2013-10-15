@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block extrastyles %}
+<link type="text/css" rel="stylesheet/less" href="{% static 'css/tables.less' %}" />
+<link type="text/css" rel="stylesheet/less" href="{% static 'css/detail.less' %}" />
+{% endblock extrastyles %}
+
+
+{% block content %}
+<div id="content-left">
+  <div class="game">
+    <table class="list-content">
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>1&ordm</th>
+          <th>2&ordm</th>
+          <th>3&ordm</th>
+          <th>4&ordm</th>
+          <th>5&ordm</th>
+          <th>6&ordm</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>{{ infos.number }}</td>
+        <td>{{ infos.n01 }}</td>
+        <td>{{ infos.n02 }}</td>
+        <td>{{ infos.n03 }}</td>
+        <td>{{ infos.n04 }}</td>
+        <td>{{ infos.n05 }}</td>
+        <td>{{ infos.n06 }}</td>
+      </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="7"></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  
+  <div class="info-box">
+    <div class="info">
+      <h3>{% trans "Date" %}</h3>
+      <p>{% trans "Date" %}: {{ infos.raffle_date }}</p>
+    </div>
+  </div>
+  
+  <div class="info-box">
+    {% if infos.accumulated_status %}
+    <div class="info">
+      <h3>{% trans "Accumulated" %}</h3>
+      <p>{% trans "Total" %}: {{ infos.accumulated_value }}</p>
+    </div>
+    {% endif %}
+    <div class="info">
+      <h3>{% trans "Next prize" %}</h3>
+      <p>{% trans "Total" %}: {{ infos.prize_next }}</p>
+    </div>
+    {% if infos.prize_turnaround != 0 %}
+    <div class="info">
+      <h3>{% trans "Turnaround prize" %}</h3>
+      <p>{% trans "Total" %}: {{ infos.prize_turnaround }}</p>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<div id="content-right">
+  <div class="info-box">
+    <div class="info">
+      <h3>{% trans "Collected amount" %}</h3>
+      <p>{% trans "Total" %}: {{ infos.collected_amount }}</p>
+    </div>
+    <div class="info">
+      <h3>{% trans "Six hits" %}</h3>
+      <p>{% trans "Winners" %}: {{ infos.sena_winners }}<br>{% trans "Earnead amount" %}: {{ infos.sena_share }}</p>
+    </div>
+    <div class="info">
+      <h3>{% trans "Five hits" %}</h3>
+      <p>{% trans "Winners" %}: {{ infos.quina_winners }}<br>{% trans "Earnead amount" %}: {{ infos.quina_share }}</p>
+    </div>
+    <div class="info">
+      <h3>{% trans "Four hits" %}</h3>
+      <p>{% trans "Winners" %}: {{ infos.quadra_winners }}<br>{% trans "Earnead amount" %}: {{ infos.quadra_share }}</p>
+    </div>
+  </div>
+</div>
+{% endblock content %}
