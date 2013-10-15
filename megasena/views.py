@@ -4,7 +4,7 @@ from .models import Raffle
 
 
 def home(request):
-    raffle = Raffle.objects.exclude(n01__isnull=True)[:10]
+    raffles = Raffle.objects.exclude(n01__isnull=True)[:10]
     return TemplateResponse(request, 'megasena/home.html', {
-        'raffle': raffle,
+        'raffles': raffles,
     })
