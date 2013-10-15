@@ -11,6 +11,15 @@
   <script type="text/javascript" src="{% static 'js/manage.items.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/jquery.autotab-1.1b.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/forms.js' %}"></script>
+  <script type="text/javascript">
+    $(function() {
+      $('label').remove();
+      if ($('form').hasClass('add')) {
+        var label = $('<label for="id_number">Concourse:</label>');
+        $('#concourse').prepend(label);
+      }
+    });
+  </script>
 {% endblock extrascripts %}
 
 {% block content %}

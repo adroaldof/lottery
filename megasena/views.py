@@ -8,7 +8,7 @@ from django.template.response import TemplateResponse
 from django.utils.translation import ugettext_lazy as _
 
 
-from .forms import ConcourseForm, BetForm
+from .forms import ConcourseForm, BetForm, BetFormset
 from .models import Concourse, Raffle, Bet
 
 
@@ -59,7 +59,7 @@ def add(request):
                 form.number = concourse
                 form.save()
             messages.add_message(
-                request, messages.INFO, _('Game was added successfully.')
+                request, messages.INFO, _('Game was successfully added.')
             )
             return HttpResponseRedirect('/megasena/list')
 
@@ -73,3 +73,23 @@ def add(request):
 
     return TemplateResponse(request, 'megasena/form.html', args)
 
+
+def update(request, number):
+    concourse = get_object_or_404(Concourse, number=number)
+    if request.method == 'POST':
+        formset = BetFormset(request.POST, request.FILES, instance=concourse)
+        if formset.is_valid():
+            formset.save()
+            messages.add_message(
+                request, messages.INFO, _('Game was successfully updated.')
+            )
+            return HttpResponseRedirect('/megasena/list')
+
+    args = {}
+    args.update(csrf(request))
+    args['formset'] = BetFormset(instance=concourse)
+    args['title'] = _("Update Your Bet")
+    args['class'] = 'update'
+    args['operation'] = _("Update Game")
+
+    return TemplateResponse(request, 'megasena/form.html', args)
