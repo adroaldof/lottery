@@ -23,3 +23,7 @@ class BetForm(forms.ModelForm):
     class Meta:
         model = Bet
         exclude = ('number', 'stubborn', 'hits',)
+
+
+class UploadFileForm(forms.Form):
+    file = forms.FileField(label=_("Select a file"))
