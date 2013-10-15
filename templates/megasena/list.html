@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block extrastyles %}
+  <link type="text/css" rel="stylesheet/less" href="{% static 'css/tables.less' %}" />
+  <link type="text/css" rel="stylesheet/less" href="{% static 'css/list.less' %}" />
+  <link type="text/css" rel="stylesheet/less" href="{% static 'css/messages.less' %}" />
+  
+{% endblock extrastyles %}
+
+{% block extrascripts %}
+  <script type="text/javascript">
+  $(function(){
+    $('.close').on('click', function(){
+      $(this).parent().removeClass('active').remove();
+    });
+    $('.action-btn.remove').on('click', function() {
+      message = 'Are you sure that you want to delete this item?';
+      if (confirm(message)) {
+        $.get($(this).data('remove')).done(function() {
+          window.location.reload();
+        });
+      }
+    });
+  });
+  </script>
+{% endblock extrascripts %}
+
+{% block content %}
+
+{% if messages %}
+<div class="messages {% if messages %}active{% endif %}">
+  <ul>
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+  </ul>
+  <span class="close"><p>D</p></span>
+</div>
+{% endif %}
+
+{% if infos %}
+<div class="box-border">
+  <table>
+    <thead>
+      <tr>
+        <th>{% trans "Concourse" %}</th>
+        <th>1&ordm</th>
+        <th>2&ordm</th>
+        <th>3&ordm</th>
+        <th>4&ordm</th>
+        <th>5&ordm</th>
+        <th>6&ordm</th>
+        <th>
+          <a href="{% url 'megasena-add-bet' %}" class="action-btn">&</a>
+        </th>
+      </tr>
+    </thead>
+    {% for bet in infos %}
+    <tr>
+      <td>{{ bet.number }}</td>
+      <td>{{ bet.n01 }}</td>
+      <td>{{ bet.n02 }}</td>
+      <td>{{ bet.n03 }}</td>
+      <td>{{ bet.n04 }}</td>
+      <td>{{ bet.n05 }}</td>
+      <td>{{ bet.n06 }}</td>
+      <td></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="13">{% trans "List of your great bets" %}</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+{% else %}
+<div class="box-border">
+  <div class="no-data">
+    <div class="title">
+      <h3>{% trans "You have no bets" %}</h3>
+    </div>
+    <div class="texts">
+      <p>{% trans "Click" %} <a href="{% url 'megasena-add-bet' %}" alt="Check">{% trans "here" %}</a> {% trans "to add a bet" %}.</p>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock content %}

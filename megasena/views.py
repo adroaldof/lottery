@@ -20,3 +20,10 @@ def detail(request, number):
     else:
         messages.add_message(request, messages.INFO, _('This concourse was not raffled yet'))
         return HttpResponseRedirect('/megasena')
+
+
+def list(request):
+    infos = Bet.objects.all()
+    return TemplateResponse(request, 'megasena/list.html', {
+        'infos': infos,
+    })
