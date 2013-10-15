@@ -29,3 +29,7 @@ class BetForm(forms.ModelForm):
 BetFormset = inlineformset_factory(
     Concourse, Bet, form=BetForm, can_delete=True, extra=0
 )
+
+
+class UploadFileForm(forms.Form):
+    file = forms.FileField(label=_("Select a file"))
