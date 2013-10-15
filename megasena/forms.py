@@ -1,4 +1,5 @@
 from django import forms
+from django.forms.models import inlineformset_factory
 from django.utils.translation import ugettext_lazy as _
 
 from .models import Concourse, Bet
@@ -23,3 +24,8 @@ class BetForm(forms.ModelForm):
     class Meta:
         model = Bet
         exclude = ('number', 'stubborn', 'hits',)
+
+
+BetFormset = inlineformset_factory(
+    Concourse, Bet, form=BetForm, can_delete=True, extra=0
+)
