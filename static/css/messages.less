@@ -1,0 +1,94 @@
+// border
+@border-color: #C4C7C8;
+@border-type: 1px solid @border-color;
+@border-radius: 2px;
+
+// Messages
+@messages-margin: 10px;
+@messages-position: relative;
+@messages-width: 900px;
+@messages-background-color: #E6E8E9;
+@messages-border: 1px solid #C4C7C8;
+
+// List
+@ul-width: 850px;
+@ul-padding: 10px;
+@ul-margin: 0 0 10px 0;
+@ul-float: left;
+@ul-li-text-align: center;
+@ul-li-text-decoration: none;
+@ul-li-opacity: 1;
+
+// Close button
+@span-display: table;
+@span-float: right;
+@span-width: 30px;
+@span-height: 30px;
+@span-font-size: 14px;
+@span-text-decoration: none;
+
+
+.border-radius (@radius: 5px) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  border-radius: @radius;
+}
+
+.messages {
+  margin: @messages-margin;
+  position: @messages-position;
+  width: @messages-width;
+  background-color: @messages-background-color;
+  border: @border-type;
+  .border-radius(@border-radius);
+  height: 0;
+  opacity: 0;
+  -webkit-transition: opacity 1.5s, height 1.5s;
+     -moz-transition: opacity 1.5s, height 1.5s;
+          transition: opacity 1.5s, height 1.5s;
+
+  &.active {
+    height: 30px;
+    opacity: 1;
+    -webkit-transition: opacity 1.5s, height 1.5s;
+       -moz-transition: opacity 1.5s, height 1.5s;
+            transition: opacity 1.5s, height 1.5s;
+  }
+
+  ul {
+    width: @ul-width;
+    padding: @ul-padding;
+    margin: @ul-margin;
+    float: @ul-float;
+    list-style: none;
+    li {
+      text-align: @ul-li-text-align;
+      text-decoration: @ul-li-text-decoration;
+      opacity: @ul-li-opacity;
+      transition: all 1s linear 0s;
+      .info {
+        color: green;
+      }
+    }
+  }
+
+  span {
+    &.close {
+      display: @span-display;
+      float: @span-float;
+      width: @span-width;
+      height: @span-height;
+      font-size: @span-font-size;
+      text-decoration: @span-text-decoration;
+      cursor: pointer;
+      p {
+        font-family: 'Pictos';
+        font-size: 18px;
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+        color: #E1552F;
+      }
+    }
+  }
+}
