@@ -101,6 +101,31 @@ html {
       }
     }
 
+    .action-btn {
+      &:link,
+      &:visited {
+        padding: 2px 4px;
+        margin: 4px 0 0 0;
+        font-family: "Pictos";
+        font-size: 16px;
+        text-decoration: none;
+        -webkit-font-smoothing: antialiased;
+           -moz-font-smoothing: antialiased;
+                font-smoothing: antialiased;
+        color: #000000;
+        background-color: #C4C7C8;
+        border: 1px solid #A2A2A2;
+        border-radius: 2px;
+      }
+
+      &:hover {
+        text-decoration: none;
+        -webkit-box-shadow: 0 0 3px #000000;
+           -moz-box-shadow: 0 0 3px #000000;
+                box-shadow: 0 0 3px #000000;
+      }
+    }
+
     #wrapper {
       width: @wrapper-width;
       margin: @wrapper-margin;
