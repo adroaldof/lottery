@@ -1,0 +1,146 @@
+// borders
+@border-radius: 2px;
+@border-color: #C4C7C8;
+@form-box-background-color: #C4C7C8;
+
+// Form 
+@form-box-width: 500px;
+@form-background-color: #E6E8E9;
+@label-width: 145px;
+
+// Form inputs
+@input-width: 210px;
+@input-background-color: #EEEEEE;
+
+// Form buttons
+@button-width: 120px;
+@button-height: 30px;
+@button-padding: 5px;
+@button-background-color: #E6E8E9;
+@button-text-color: #000000;
+
+// Texts
+@title-text-color: #000000;
+@label-text-color: #000000;
+@text-padding: 6px;
+
+// Inputs
+@input-code-width: 45px;
+@input-numbers-width: 20px;
+
+.form-box {
+  width: @form-box-width;
+  margin: 10px auto 0 auto;
+  padding: 5px;
+  border: 1px solid @border-color;
+  .border-radius(@border-radius);
+  .form-title {
+    background-color: @form-box-background-color;
+    padding: 15px;
+    border-bottom: 1px solid @border-color;
+    h3 {
+      text-align: center;
+      color: @title-text-color;
+    }
+  }
+}
+
+form {
+  margin: 0;
+  width: (@form-box-width - 20);
+  padding: 10px;
+  display: table;
+  background-color: @form-background-color;\
+  ul{
+    display: inline;
+  }
+  li {
+    list-style: none;
+    margin-bottom: 5px;
+    display: inline;
+  }
+  label {
+    display: block;
+    float: left;
+    width: @label-width;
+    margin-top: 2px;
+    padding-top: @text-padding;
+    color: @label-text-color;
+  }
+  input[type='file'] {
+    width: 316px;
+    padding: @text-padding;
+    border: 1px solid @border-color;
+    background-color: (@form-background-color * 0.95);
+    .border-radius(@border-radius);
+    font-size: 14px;
+  }
+  input[type='text'], input[type='email'], input[type='password'] {
+    width: @input-width;
+    padding: @text-padding;
+    border: 1px solid @border-color;
+    background-color: (@form-background-color * 0.95);
+    .border-radius(@border-radius);
+    font-size: 14px;
+  }
+  input[type='reset'], input[type='submit'], input[type='button'] {
+    width: @button-width;
+    margin: 10px 5px 0 0;
+    padding: @button-padding;
+    border: 1px solid @border-color;
+    background-color: @button-background-color;
+    color: @button-text-color;
+    .border-radius(@border-radius);
+    font-size: 14px;
+    float: right;
+    cursor: pointer;
+  }
+  input[name='number'] {
+    text-align: center;
+  }
+  input.wrong {
+    font-weight: bold;
+    background-color: #D8FF32;
+    color: #FF0000;
+  }
+  .bets-title {
+    margin: 15px 0 15px 0;
+    span {
+      font-size: 18px;
+      font-weight: bold;
+    }
+  }
+  .bet-numbers {
+    input[type='text'] {
+      width: 45px;
+      text-align: center;
+    }
+    ul {
+      display: inline;
+      clear: left;
+    }
+    li {
+      width: 65px;
+      display: inline-block;
+      text-align: center;
+    }
+  }
+  .buttons {
+    clear: both;
+    text-align: right;
+    width: 100%;
+  }
+  .errors {
+    margin: 0;
+    width: (@form-box-width - 20);
+    color: #b70000;
+  }
+}
+
+// Functions
+// Call - .border-radius(20px);
+.border-radius (@radius: 5px) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  border-radius: @radius;
+}

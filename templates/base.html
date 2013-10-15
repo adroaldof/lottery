@@ -25,6 +25,8 @@
         <h1>ToDo</h1>
       </div>
       <ul id="navigation" class="nav_hint">
+        <li><a href="{% url 'megasena-add-bet' %}"><span class="subheading">{% trans "Add New Bet" %}</span><br />{% trans "Add Bet" %}</a></li>
+        <li><a href="{% url 'megasena-bets-list' %}"><span class="subheading">{% trans "My Bets Table" %}</span><br />{% trans "Bets List" %}</a></li>
         <li><a href="{% url 'megasena-home' %}"><span class="subheading">{% trans "Last Raffled Games" %}</span><br />{% trans "Games List" %}</a></li>
         <li><a href="{% url 'index' %}"><span class="subheading">{% trans "Home Page" %}</span><br />{% trans "Index" %}</a></li>
       </ul>

@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block extrastyles %}
+<link type="text/css" rel="stylesheet/less" href="{% static 'css/forms.less' %}" />
+{% endblock extrastyles %}
+
+{% block extrascripts %}
+  <script type="text/javascript" src="{% static 'js/manage.items.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.autotab-1.1b.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/forms.js' %}"></script>
+{% endblock extrascripts %}
+
+{% block content %}
+<div class='form-box'>
+  <div class='form-title'>
+    <h3>{{ title }}</h3>
+  </div>
+  <form action='' method='POST' class='{{ class }}' enctype="{{ extra }}">
+    {% csrf_token %}
+    {% if form.errors %}
+    <div class='errors'>
+      <ul class='errorlist'><li>{% trans "Error: " %}{{ form.errors }}</li></ul>
+    </div>
+    {% endif %}
+
+    <div id="concourse">
+      {{ form.as_ul }}
+    </div>
+    {% if formset %}
+    <div class="bets-title">
+      <span>{% trans "Bets" %}</span>
+      <a id="add" href="#" class='action-btn'>+</a>
+    </div>
+
+    <div class="bet-numbers">
+      <div class="bet-titles">
+        <ul>
+          <li>1&ordm</li>
+          <li>2&ordm</li>
+          <li>3&ordm</li>
+          <li>4&ordm</li>
+          <li>5&ordm</li>
+          <li>6&ordm</li>
+          <li>{% trans "Delete" %}</li>
+        </ul>
+      </div>
+      {{ formset.management_form}}
+      {% for form in formset.forms %}
+      <div class="item">
+        {{ form.as_ul}}
+        <li>
+          <a class='delete action-btn' href="#">D</a>
+        </li>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <span class='buttons'>
+      <input type='submit' value='{{ operation }}'/>
+      <input type='reset' value='{% trans "Clear Up" %}'/>
+    </span>
+  </form>
+</div>
+{% endblock content %}

@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from .models import Concourse, Bet
 
 
-class ConcourseForm(forms.ModelForm):
+class ConcourseForm(forms.Form):
     number = forms.CharField(max_length=4, label=_('Concourse'))
 
     class Meta:
