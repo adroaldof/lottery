@@ -54,7 +54,7 @@ class Bet(models.Model):
     hits = models.IntegerField(max_length=1, blank=True, null=True)
 
     class Meta:
-        ordering = ['number']
+        ordering = ['-hits', 'number']
 
     def __unicode__(self):
         return u"%s" % self.number
