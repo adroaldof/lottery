@@ -8,4 +8,5 @@ urlpatterns = patterns('megasena.views',
     url(r'^create/$', 'create', name='megasena-create-bet'),
     url(r'^update/(?P<number>\d+)/$', 'update', name='megasena-update-bet'),
     url(r'^delete/(?P<pk>\d+)/$', 'delete', name='megasena-delete-bet'),
+    url(r'^check/(?P<number>\d+)', 'check', name='megasena-check-bet')
 )

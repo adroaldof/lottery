@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block extrastyles %}
+  <link type="text/css" rel="stylesheet/less" href="{% static 'css/tables.less' %}" />
+  <link type="text/css" rel="stylesheet/less" href="{% static 'css/bets.less' %}" />
+{% endblock extrastyles %}
+
+{% block extrascripts %}
+  <script type="text/javascript" src="{% static 'js/check.js' %}"></script>
+{% endblock extrascripts %}
+
+{% block content %}
+{% if raffled %}
+<div class="box-border">
+  <table>
+    <thead>
+      <tr>
+        <th>Code</th>
+        <th>1&ordm</th>
+        <th>2&ordm</th>
+        <th>3&ordm</th>
+        <th>4&ordm</th>
+        <th>5&ordm</th>
+        <th>6&ordm</th>
+      </tr>
+    </thead>
+    <tr class="concourse">
+      {% for raffle in raffled %}
+        <td><div class="number">{{ raffle.number }}</div></td>
+        <td><div class="raffled">{{ raffle.n01 }}</div></td>
+        <td><div class="raffled">{{ raffle.n02 }}</div></td>
+        <td><div class="raffled">{{ raffle.n03 }}</div></td>
+        <td><div class="raffled">{{ raffle.n04 }}</div></td>
+        <td><div class="raffled">{{ raffle.n05 }}</div></td>
+        <td><div class="raffled">{{ raffle.n06 }}</div></td>        
+      {% endfor %}
+    </tr>
+    {% for bet in bets %}
+    <tr class="bets">
+      <td><span class="check-status dont-match"></span></td>
+      <td><div class="bet">{{ bet.n01 }}</div></td>
+      <td><div class="bet">{{ bet.n02 }}</div></td>
+      <td><div class="bet">{{ bet.n03 }}</div></td>
+      <td><div class="bet">{{ bet.n04 }}</div></td>
+      <td><div class="bet">{{ bet.n05 }}</div></td>
+      <td><div class="bet">{{ bet.n06 }}</div></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="8">{% trans "Check out your bet" %}</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+{% else %}
+<div class="box-border">
+  <div class="no-data">
+    <div class="title">
+      <h3>{% trans "You have no bets" %}</h3>
+    </div>
+    <div class="texts">
+      <p>{% trans "Click" %} <a href="{% url 'game-add' %}" alt="Check">{% trans "here" %}</a> {% trans "to add a bet" %}.</p>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock content %}

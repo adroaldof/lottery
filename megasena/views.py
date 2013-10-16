@@ -74,6 +74,23 @@ def create(request):
     return TemplateResponse(request, 'megasena/form.html', args)
 
 
+def check(request, number):
+    last = Raffle.objects.exclude(n01__isnull=True).aggregate(Max('number'))
+    if last['number__max'] is None or last['number__max'] < int(number):
+        print '\nIs not none'
+        messages.add_message(request, messages.INFO, _('This concourse was not raffled yet'))
+        return HttpResponseRedirect('/megasena/bets')
+    else:
+        if last['number__max'] >= int(number):
+            concourse = get_object_or_404(Concourse, number=number)
+            raffled = concourse.raffle_set.all()
+            bets = concourse.bet_set.all()
+            return TemplateResponse(request, 'megasena/check.html', {
+                'raffled': raffled,
+                'bets': bets
+            })
+
+
 def update(request, number):
     concourse = get_object_or_404(Concourse, number=number)
 
