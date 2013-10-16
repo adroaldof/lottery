@@ -20,7 +20,7 @@ def home(request):
 
 
 def detail(request, number):
-    last = Raffle.objects.exclude(n01__isnull=True).aggregate(Max('number'))['number__max']
+    last = Raffle.objects.all().aggregate(Max('number'))['number__max']
     if int(number) <= last:
         infos = get_object_or_404(Raffle, number=number)
         return TemplateResponse(request, 'megasena/detail.html', {
