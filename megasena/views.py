@@ -27,7 +27,9 @@ def detail(request, number):
             'infos': infos,
         })
     else:
-        messages.add_message(request, messages.INFO, _('This concourse was not raffled yet'))
+        messages.add_message(
+            request, messages.INFO, _('This concourse was not raffled yet')
+        )
         return HttpResponseRedirect('/megasena')
 
 
@@ -53,7 +55,7 @@ def create(request):
         form = ConcourseForm(request.POST)
         formset = Formset(request.POST, request.FILES)
         if form.is_valid() and formset.is_valid():
-            concourse, success = Concourse.objects.get_or_create(**form.cleaned_data)
+            concourse, s = Concourse.objects.get_or_create(**form.cleaned_data)
             for form in formset.forms:
                 form = form.save(commit=False)
                 form.number = concourse
@@ -78,7 +80,9 @@ def check(request, number):
     last = Raffle.objects.exclude(n01__isnull=True).aggregate(Max('number'))
     if last['number__max'] is None or last['number__max'] < int(number):
         print '\nIs not none'
-        messages.add_message(request, messages.INFO, _('This concourse was not raffled yet'))
+        messages.add_message(
+            request, messages.INFO, _('This concourse was not raffled yet')
+        )
         return HttpResponseRedirect('/megasena/bets')
     else:
         if last['number__max'] >= int(number):
@@ -118,5 +122,7 @@ def delete(request, pk):
 
     if bet:
         bet.delete()
-        messages.add_message(request, messages.INFO, _('Bet was sucessfully deleted'))
+        messages.add_message(
+            request, messages.INFO, _('Bet was sucessfully deleted')
+        )
         return HttpResponseRedirect('/megasena/bets')
