@@ -5,7 +5,6 @@ import urllib2
 import zipfile
 
 from bs4 import BeautifulSoup
-from django.utils.translation import ugettext_lazy as _
 from StringIO import StringIO
 
 from django.conf import settings
