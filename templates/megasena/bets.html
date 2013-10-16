@@ -4,7 +4,7 @@
 
 {% block extrastyles %}
   <link type="text/css" rel="stylesheet/less" href="{% static 'css/tables.less' %}" />
-  <link type="text/css" rel="stylesheet/less" href="{% static 'css/list.less' %}" />
+  <link type="text/css" rel="stylesheet/less" href="{% static 'css/bets.less' %}" />
   <link type="text/css" rel="stylesheet/less" href="{% static 'css/messages.less' %}" />
   
 {% endblock extrastyles %}
@@ -54,8 +54,9 @@
         <th>5&ordm</th>
         <th>6&ordm</th>
         <th></th>
+        <th></th>
         <th>
-          <a href="{% url 'megasena-add-bet' %}" class="action-btn">&</a>
+          <a href="{% url 'megasena-create-bet' %}" class="action-btn">&</a>
         </th>
       </tr>
     </thead>
@@ -69,6 +70,9 @@
       <td>{{ bet.n05 }}</td>
       <td>{{ bet.n06 }}</td>
       <td>
+        <a href="{% url 'megasena-check-bet' bet.number.number %}" class="action-btn check">J</a>
+      </td>
+      <td>
         <a href="{% url 'megasena-update-bet' bet.number.number %}" class="action-btn update">p</a>
       </td>
       <td>
@@ -79,7 +83,7 @@
     </tbody>
     <tfoot>
       <tr>
-        <td colspan="9">{% trans "List of your great bets" %}</td>
+        <td colspan="10">{% trans "List of your great bets" %}</td>
       </tr>
     </tfoot>
   </table>
@@ -91,7 +95,7 @@
       <h3>{% trans "You have no bets" %}</h3>
     </div>
     <div class="texts">
-      <p>{% trans "Click" %} <a href="{% url 'megasena-add-bet' %}" alt="Check">{% trans "here" %}</a> {% trans "to add a bet" %}.</p>
+      <p>{% trans "Click" %} <a href="{% url 'megasena-create-bet' %}" alt="Check">{% trans "here" %}</a> {% trans "to add a bet" %}.</p>
     </div>
   </div>
 </div>

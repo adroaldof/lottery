@@ -31,9 +31,9 @@ def detail(request, number):
         return HttpResponseRedirect('/megasena')
 
 
-def list(request):
+def bets(request):
     infos = Bet.objects.all()
-    return TemplateResponse(request, 'megasena/list.html', {
+    return TemplateResponse(request, 'megasena/bets.html', {
         'infos': infos,
     })
 
@@ -61,7 +61,7 @@ def add(request):
             messages.add_message(
                 request, messages.INFO, _('Bet was successfully added')
             )
-            return HttpResponseRedirect('/megasena/list')
+            return HttpResponseRedirect('/megasena/bets')
 
     args = {}
     args.update(csrf(request))
@@ -76,6 +76,7 @@ def add(request):
 
 def update(request, number):
     concourse = get_object_or_404(Concourse, number=number)
+
     if request.method == 'POST':
         formset = BetFormset(request.POST, request.FILES, instance=concourse)
         if formset.is_valid():
@@ -83,7 +84,7 @@ def update(request, number):
             messages.add_message(
                 request, messages.INFO, _('Bet was successfully updated')
             )
-            return HttpResponseRedirect('/megasena/list')
+            return HttpResponseRedirect('/megasena/bets')
 
     args = {}
     args.update(csrf(request))
@@ -101,4 +102,4 @@ def delete(request, pk):
     if bet:
         bet.delete()
         messages.add_message(request, messages.INFO, _('Bet was sucessfully deleted'))
-        return HttpResponseRedirect('/megasena/list')
+        return HttpResponseRedirect('/megasena/bets')
