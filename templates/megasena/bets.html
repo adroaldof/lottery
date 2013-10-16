@@ -53,8 +53,11 @@
         <th>4&ordm</th>
         <th>5&ordm</th>
         <th>6&ordm</th>
+        <th colspan="2">{% trans "Hits" %}</th>
         <th></th>
-        <th></th>
+        <th>
+          <a href="{% url 'megasena-check-all' %}" class="action-btn check-all">Y</a>
+        </th>
         <th>
           <a href="{% url 'megasena-create-bet' %}" class="action-btn">&</a>
         </th>
@@ -69,6 +72,8 @@
       <td>{{ bet.n04 }}</td>
       <td>{{ bet.n05 }}</td>
       <td>{{ bet.n06 }}</td>
+      <td>{% if bet.hits == None %}-{% else %}{{ bet.hits }}{% endif %}</td>
+      <td><span class="check-status {% if bet.hits == None %}none{% else %}{% if bet.hits > 3 and object.hits < 7 %}match{% else %}dont-match{% endif %}{% endif %}"></span></td>
       <td>
         <a href="{% url 'megasena-check-bet' bet.number.number %}" class="action-btn check">J</a>
       </td>
@@ -83,7 +88,7 @@
     </tbody>
     <tfoot>
       <tr>
-        <td colspan="10">{% trans "List of your great bets" %}</td>
+        <td colspan="13">{% trans "List of your great bets" %}</td>
       </tr>
     </tfoot>
   </table>

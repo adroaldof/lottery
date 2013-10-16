@@ -10,4 +10,5 @@ urlpatterns = patterns(
     url(r'^update/(?P<number>\d+)/$', 'update', name='megasena-update-bet'),
     url(r'^delete/(?P<pk>\d+)/$', 'delete', name='megasena-delete-bet'),
     url(r'^check/(?P<number>\d+)', 'check', name='megasena-check-bet')
+    url(r'^check/all', 'check_all', name='megasena-check-all'),
 )

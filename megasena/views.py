@@ -125,3 +125,34 @@ def check(request, number):
                 'raffled': raffled,
                 'bets': bets
             })
+
+
+def check_all(request):
+    message = _("No luck this time, may be next concourse")
+    hits = 0
+    bets = Bet.objects.all()
+
+    for bet in bets:
+        raffled = Raffle.objects.all()
+        last = raffled.aggregate(Max('number'))['number__max']
+        if bet.hits is None and bet.number.number <= last:
+            curr = raffled.get(number=bet.number)
+            numbers = [
+                curr.n01, curr.n02, curr.n03, curr.n04, curr.n05, curr.n06
+            ]
+            bets = [bet.n01, bet.n02, bet.n03, bet.n04, bet.n05, bet.n06]
+
+            for s in numbers:
+                for b in bets:
+                    if s == b:
+                        hits += 1
+
+            bet.hits = hits
+            bet.save()
+
+            if (hits > 3):
+                message = _("Awesome! You are a lucky person, you won a prize")
+            hits = 0
+
+    messages.add_message(request, messages.INFO, message)
+    return HttpResponseRedirect('/megasena/bets')
