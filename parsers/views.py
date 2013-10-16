@@ -9,11 +9,12 @@ from megasena.models import Files
 from .forms import UploadFileForm
 from .parser import open_local_file
 
+
 def parse_megasena(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            file = Files(file = request.FILES['file'])
+            file = Files(file=request.FILES['file'])
             file.save()
             return HttpResponseRedirect('/parse/parse_file/')
 
