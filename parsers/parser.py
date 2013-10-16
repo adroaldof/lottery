@@ -114,7 +114,6 @@ def unzip_file(file):
                 filename = file.filename
         uncompressed = files.open(filename)
     except:
-        print _("Can't open zip file")
         pass
 
     parse_data(uncompressed)

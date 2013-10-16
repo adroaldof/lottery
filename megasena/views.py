@@ -112,7 +112,6 @@ def delete(request, pk):
 def check(request, number):
     last = Raffle.objects.exclude(n01__isnull=True).aggregate(Max('number'))
     if last['number__max'] is None or last['number__max'] < int(number):
-        print '\nIs not none'
         messages.add_message(
             request, messages.INFO, _('This concourse was not raffled yet')
         )
