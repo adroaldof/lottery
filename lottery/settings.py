@@ -2,6 +2,7 @@ import os
 
 from django.utils.translation import ugettext_lazy as _
 
+
 def root(*args):
     return os.path.join(os.path.dirname(__file__), *args)
 
@@ -39,8 +40,8 @@ TIME_ZONE = 'America/Sao_Paulo'
 
 # Languages available on this system.
 LANGUAGES = (
-  ('pt-br', _('Brazilian Portuguese')),
-  ('en', _('English')),
+    ('pt-br', _('Brazilian Portuguese')),
+    ('en', _('English')),
 )
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -91,7 +92,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -101,7 +102,7 @@ SECRET_KEY = '+_hd+s!4)6hrgcj+v7rwsp&^q&d!@)8z_^4k0s_)hy2_^%_@@$'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    # 'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -120,7 +121,7 @@ ROOT_URLCONF = 'lottery.urls'
 WSGI_APPLICATION = 'lottery.wsgi.application'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Put strings here, like "/home/html/django_templates"".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     root('../templates'),

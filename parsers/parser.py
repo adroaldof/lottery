@@ -59,26 +59,26 @@ def parse_data(page):
 
             concourse, created = Concourse.objects.get_or_create(number=q1)
             megasena, created = Raffle.objects.get_or_create(
-                    number = concourse,
-                    raffle_date = q2,
-                    n01 = q3,
-                    n02 = q4,
-                    n03 = q5,
-                    n04 = q6,
-                    n05 = q7,
-                    n06 = q8,
-                    collected_amount = q9,
-                    sena_winners = q10,
-                    sena_share = q11,
-                    quina_winners = q12,
-                    quina_share = q13,
-                    quadra_winners = q14,
-                    quadra_share = q15,
-                    accumulated_status = q16,
-                    accumulated_value = q17,
-                    prize_next = q18,
-                    prize_turnaround = q19
-                )
+                number=concourse,
+                raffle_date=q2,
+                n01=q3,
+                n02=q4,
+                n03=q5,
+                n04=q6,
+                n05=q7,
+                n06=q8,
+                collected_amount=q9,
+                sena_winners=q10,
+                sena_share=q11,
+                quina_winners=q12,
+                quina_share=q13,
+                quadra_winners=q14,
+                quadra_share=q15,
+                accumulated_status=q16,
+                accumulated_value=q17,
+                prize_next=q18,
+                prize_turnaround=q19
+            )
 
             if created:
                 tag = True
@@ -91,7 +91,7 @@ def parse_data(page):
 def open_local_file():
     system_path = settings.MEDIA_ROOT
     file_path = '/megasena/'
-    filepath =  system_path + file_path + 'D_mgsasc.zip'
+    filepath = system_path + file_path + 'D_mgsasc.zip'
     file = urllib2.urlopen('file://' + filepath)
 
     try:
@@ -118,4 +118,3 @@ def unzip_file(file):
         pass
 
     parse_data(uncompressed)
-
