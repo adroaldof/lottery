@@ -38,7 +38,7 @@ def bets(request):
     })
 
 
-def add(request):
+def create(request):
     class RequiredFormSet(BaseFormSet):
         def __init__(self, *args, **kwargs):
             super(RequiredFormSet, self).__init__(*args, **kwargs)
