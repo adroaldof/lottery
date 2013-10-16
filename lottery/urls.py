@@ -4,7 +4,8 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     url(r'^$', 'lottery.views.main_page', name='index'),
     url(r'^megasena/', include('megasena.urls')),
     url(r'^parse/', include('parsers.urls')),
