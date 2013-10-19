@@ -41,7 +41,8 @@
 @navigation-li-a-font-weight: bold;
 @navigation-li-a-color: #000;
 @navigation-li-a-text-decoration: none;
-@navigation-li-a-hover-background: url('../images/triangle.gif') no-repeat center top;
+@navigation-li-a-background: url('../images/triangle.gif') no-repeat center top;
+@navigation-li-a-hover-background: url('../images/triangle_hover.gif') no-repeat center top;
 
 // Content
 @content-width: 890px;
@@ -170,9 +171,11 @@ html {
               font-weight: @navigation-li-a-font-weight;
               color: @navigation-li-a-color;
               text-decoration: @navigation-li-a-text-decoration;
-              &:hover,
-              &.current {
+              &:hover {
                 background: @navigation-li-a-hover-background;
+              }
+              &.current {
+                background: @navigation-li-a-background;
               }
             }
           }

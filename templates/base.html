@@ -12,6 +12,27 @@
   {% block scripts %}
   <script type="text/javascript" src="{% static 'js/jquery-2.0.3.js' %}" ></script>
   <script type="text/javascript" src="{% static 'js/less-1.4.1.min.js' %}" ></script>
+  <script type="text/javascript" charset="utf-8">
+    $(function() {
+      var storage = localStorage.getItem('current');
+      if (storage === null || storage.length === 0) {
+        localStorage.setItem('current', 'home');
+        storage = 'home';
+      }
+
+      $('.nav_hint li').on('click', 'a', function() {
+        localStorage.setItem('current', $(this).data('current'));
+      });
+
+      $('.nav_hint li').find('a').each(function() {
+        if ($(this).data('current') === storage) {
+          $(this).addClass('current');
+        } else {
+          $(this).removeClass('current');
+        }
+      });
+    });
+  </script>
   {% block extrascripts %}{% endblock extrascripts %}
   {% endblock scripts %}
 {% endblock head %}
@@ -25,10 +46,10 @@
         <h1>ToDo</h1>
       </div>
       <ul id="navigation" class="nav_hint">
-        <li><a href="{% url 'megasena-create-bet' %}"><span class="subheading">{% trans "Add New Bet" %}</span><br />{% trans "Add Bet" %}</a></li>
-        <li><a href="{% url 'megasena-bets-list' %}"><span class="subheading">{% trans "My Bets Table" %}</span><br />{% trans "Bets List" %}</a></li>
-        <li><a href="{% url 'megasena-home' %}"><span class="subheading">{% trans "Last Raffled Games" %}</span><br />{% trans "Games List" %}</a></li>
-        <li><a href="{% url 'index' %}"><span class="subheading">{% trans "Home Page" %}</span><br />{% trans "Index" %}</a></li>
+        <li><a href="{% url 'megasena-create-bet' %}" data-current="create"><span class="subheading">{% trans "Add New Bet" %}</span><br />{% trans "Add Bet" %}</a></li>
+        <li><a href="{% url 'megasena-bets-list' %}" data-current="bets"><span class="subheading">{% trans "My Bets Table" %}</span><br />{% trans "Bets List" %}</a></li>
+        <li><a href="{% url 'megasena-home' %}" data-current="concourses"><span class="subheading">{% trans "Last Raffled Games" %}</span><br />{% trans "Games List" %}</a></li>
+        <li><a href="{% url 'index' %}" data-current="home" class="current"><span class="subheading">{% trans "Home Page" %}</span><br />{% trans "Index" %}</a></li>
       </ul>
     {% endblock header %}
   </header>
