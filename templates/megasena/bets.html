@@ -46,7 +46,6 @@
   <table>
     <thead>
       <tr>
-        <th>{% trans "Concourse" %}</th>
         <th>1&ordm</th>
         <th>2&ordm</th>
         <th>3&ordm</th>
@@ -63,9 +62,13 @@
         </th>
       </tr>
     </thead>
-    {% for bet in infos %}
+    {% regroup infos by number as bets_list %}
+    {% for bets in bets_list %}
     <tr>
-      <td>{{ bet.number }}</td>
+      <td colspan="12">{{ bets.grouper }}</td>
+    </tr>
+    {% for bet in bets.list %}
+    <tr>
       <td>{{ bet.n01 }}</td>
       <td>{{ bet.n02 }}</td>
       <td>{{ bet.n03 }}</td>
@@ -85,10 +88,11 @@
       </td>
     </tr>
     {% endfor %}
+    {% endfor %}
     </tbody>
     <tfoot>
       <tr>
-        <td colspan="13">{% trans "List of your great bets" %}</td>
+        <td colspan="12">{% trans "List of your great bets" %}</td>
       </tr>
     </tfoot>
   </table>
