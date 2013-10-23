@@ -13,11 +13,7 @@
   <script type="text/javascript" src="{% static 'js/forms.js' %}"></script>
   <script type="text/javascript">
     $(function() {
-      $('label').remove();
-      if ($('form').hasClass('add')) {
-        var label = $('<label for="id_concourse">Concourse:</label>');
-        $('#concourse').prepend(label);
-      }
+      $('.item label').remove();
     });
   </script>
 {% endblock extrascripts %}
