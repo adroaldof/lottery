@@ -48,6 +48,7 @@
       <ul id="navigation" class="nav_hint">
         <li><a href="{% url 'megasena-create-bet' %}" data-current="create"><span class="subheading">{% trans "Add New Bet" %}</span><br />{% trans "Add Bet" %}</a></li>
         <li><a href="{% url 'megasena-bets-list' %}" data-current="bets"><span class="subheading">{% trans "My Bets Table" %}</span><br />{% trans "Bets List" %}</a></li>
+        <li><a href="{% url 'parse-megasena' %}"><span class="subheading">{% trans "Get last raffled games" %}</span><br />{% trans "Update Games" %}</a></li>
         <li><a href="{% url 'megasena-home' %}" data-current="concourses"><span class="subheading">{% trans "Last Raffled Games" %}</span><br />{% trans "Games List" %}</a></li>
         <li><a href="{% url 'index' %}" data-current="home" class="current"><span class="subheading">{% trans "Home Page" %}</span><br />{% trans "Index" %}</a></li>
       </ul>
