@@ -56,9 +56,9 @@ def parse_data(page):
             q18 = convert_str_to_float(col[17].string.strip())
             q19 = convert_str_to_float(col[18].string.strip())
 
-            concourse, created = Concourse.objects.get_or_create(number=q1)
+            concourse, created = Concourse.objects.get_or_create(concourse=q1)
             megasena, created = Raffle.objects.get_or_create(
-                number=concourse,
+                concourse=concourse,
                 raffle_date=q2,
                 n01=q3,
                 n02=q4,

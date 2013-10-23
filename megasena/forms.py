@@ -6,11 +6,11 @@ from .models import Concourse, Bet
 
 
 class ConcourseForm(forms.Form):
-    number = forms.CharField(max_length=4, label=_('Concourse'))
+    concourse = forms.CharField(max_length=4, label=_('Concourse'))
 
     class Meta:
         model = Concourse
-        fields = ('number',)
+        fields = ('concourse',)
 
 
 class BetForm(forms.ModelForm):
@@ -23,7 +23,7 @@ class BetForm(forms.ModelForm):
 
     class Meta:
         model = Bet
-        exclude = ('number', 'stubborn', 'hits',)
+        exclude = ('concourse', 'stubborn', 'hits',)
 
 
 BetFormset = inlineformset_factory(

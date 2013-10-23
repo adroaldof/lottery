@@ -19,10 +19,10 @@ def home(request):
     })
 
 
-def detail(request, number):
-    last = Raffle.objects.all().aggregate(Max('number'))['number__max']
-    if int(number) <= last:
-        infos = get_object_or_404(Raffle, number=number)
+def detail(request, concourse):
+    last = Raffle.objects.all().aggregate(Max('concourse'))['concourse__max']
+    if int(concourse) <= last:
+        infos = get_object_or_404(Raffle, concourse=concourse)
         return TemplateResponse(request, 'megasena/detail.html', {
             'infos': infos,
         })
@@ -58,7 +58,7 @@ def create(request):
             concourse, s = Concourse.objects.get_or_create(**form.cleaned_data)
             for form in formset.forms:
                 form = form.save(commit=False)
-                form.number = concourse
+                form.concourse = concourse
                 form.save()
             messages.add_message(
                 request, messages.INFO, _('Bet was successfully added')
@@ -76,8 +76,8 @@ def create(request):
     return TemplateResponse(request, 'megasena/form.html', args)
 
 
-def update(request, number):
-    concourse = get_object_or_404(Concourse, number=number)
+def update(request, concourse):
+    concourse = get_object_or_404(Concourse, concourse=concourse)
 
     if request.method == 'POST':
         formset = BetFormset(request.POST, request.FILES, instance=concourse)
@@ -109,16 +109,16 @@ def delete(request, pk):
         return HttpResponseRedirect('/megasena/bets')
 
 
-def check(request, number):
-    last = Raffle.objects.exclude(n01__isnull=True).aggregate(Max('number'))
-    if last['number__max'] is None or last['number__max'] < int(number):
+def check(request, concourse):
+    last = Raffle.objects.exclude(n01__isnull=True).aggregate(Max('concourse'))
+    if last['concourse__max'] is None or last['concourse__max'] < int(concourse):
         messages.add_message(
             request, messages.INFO, _('This concourse was not raffled yet')
         )
         return HttpResponseRedirect('/megasena/bets')
     else:
-        if last['number__max'] >= int(number):
-            concourse = get_object_or_404(Concourse, number=number)
+        if last['concourse__max'] >= int(concourse):
+            concourse = get_object_or_404(Concourse, concourse=concourse)
             raffled = concourse.raffle_set.all()
             bets = concourse.bet_set.all()
             return TemplateResponse(request, 'megasena/check.html', {
@@ -134,15 +134,15 @@ def check_all(request):
 
     for bet in bets:
         raffled = Raffle.objects.all()
-        last = raffled.aggregate(Max('number'))['number__max']
-        if bet.hits is None and bet.number.number <= last:
-            curr = raffled.get(number=bet.number)
-            numbers = [
+        last = raffled.aggregate(Max('concourse'))['concourse__max']
+        if bet.hits is None and bet.concourse.concourse <= last:
+            curr = raffled.get(concourse=bet.concourse)
+            concourses = [
                 curr.n01, curr.n02, curr.n03, curr.n04, curr.n05, curr.n06
             ]
             bets = [bet.n01, bet.n02, bet.n03, bet.n04, bet.n05, bet.n06]
 
-            for s in numbers:
+            for s in concourses:
                 for b in bets:
                     if s == b:
                         hits += 1

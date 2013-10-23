@@ -6,17 +6,17 @@ class Files(models.Model):
 
 
 class Concourse(models.Model):
-    number = models.IntegerField(max_length=4, unique=True)
+    concourse = models.IntegerField(max_length=4, unique=True)
 
     class Meta:
-        ordering = ['-number']
+        ordering = ['-concourse']
 
     def __unicode__(self):
-        return u"%s" % self.number
+        return u"%s" % self.concourse
 
 
 class Raffle(models.Model):
-    number = models.ForeignKey(Concourse)
+    concourse = models.ForeignKey(Concourse)
     raffle_date = models.DateField(null=True, blank=True)
     n01 = models.IntegerField(max_length=2, null=True, blank=True)
     n02 = models.IntegerField(max_length=2, null=True, blank=True)
@@ -40,11 +40,11 @@ class Raffle(models.Model):
         ordering = ['-raffle_date']
 
     def __unicode__(self):
-        return u"%s %s" % (self.number, self.raffle_date)
+        return u"%s %s" % (self.concourse, self.raffle_date)
 
 
 class Bet(models.Model):
-    number = models.ForeignKey(Concourse)
+    concourse = models.ForeignKey(Concourse)
     n01 = models.IntegerField(max_length=2)
     n02 = models.IntegerField(max_length=2)
     n03 = models.IntegerField(max_length=2)
@@ -54,7 +54,7 @@ class Bet(models.Model):
     hits = models.IntegerField(max_length=1, blank=True, null=True)
 
     class Meta:
-        ordering = ['number', '-hits']
+        ordering = ['concourse', '-hits']
 
     def __unicode__(self):
-        return u"%s" % self.number
+        return u"%s" % self.concourse
