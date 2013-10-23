@@ -48,7 +48,7 @@
     <tbody>
     {% for raffle in raffles %}
     <tr>
-      <td><a href="{% url 'megasena-detail' raffle.number.number %}">{{ raffle.number }}</a></td>
+      <td><a href="{% url 'megasena-detail' raffle.concourse.concourse %}">{{ raffle.concourse }}</a></td>
       <td>{{ raffle.n01 }}</td>
       <td>{{ raffle.n02 }}</td>
       <td>{{ raffle.n03 }}</td>

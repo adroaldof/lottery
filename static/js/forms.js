@@ -13,7 +13,7 @@ $(function() {
       .css({'color': '#000', 'cursor': 'auto'});
   }
 
-  $('form').on('keyup', 'input[name="number"]', function() {
+  $('form').on('keyup', 'input[name="concourse"]', function() {
     if (isNaN($(this).val()) || parseInt($(this).val()) <= 0 || parseInt($(this).val()) > 2000) {
       signalWrong($(this));
     } else {

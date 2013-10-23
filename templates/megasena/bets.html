@@ -62,7 +62,7 @@
         </th>
       </tr>
     </thead>
-    {% regroup infos by number as bets_list %}
+    {% regroup infos by concourse as bets_list %}
     {% for bets in bets_list %}
     <tr>
       <td colspan="12">{{ bets.grouper }}</td>
@@ -78,10 +78,10 @@
       <td>{% if bet.hits == None %}-{% else %}{{ bet.hits }}{% endif %}</td>
       <td><span class="check-status {% if bet.hits == None %}none{% else %}{% if bet.hits > 3 and object.hits < 7 %}match{% else %}dont-match{% endif %}{% endif %}"></span></td>
       <td>
-        <a href="{% url 'megasena-check-bet' bet.number.number %}" class="action-btn check">J</a>
+        <a href="{% url 'megasena-check-bet' bet.concourse.concourse %}" class="action-btn check">J</a>
       </td>
       <td>
-        <a href="{% url 'megasena-update-bet' bet.number.number %}" class="action-btn update">p</a>
+        <a href="{% url 'megasena-update-bet' bet.concourse.concourse %}" class="action-btn update">p</a>
       </td>
       <td>
         <a href="#" class="action-btn remove" data-remove="{% url 'megasena-delete-bet' bet.id %}">#</a>
