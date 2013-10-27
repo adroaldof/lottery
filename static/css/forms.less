@@ -8,6 +8,13 @@
 @form-background-color: #E6E8E9;
 @label-width: 145px;
 
+// form select
+@form-select-width: 224px;
+@form-select-height: 30px;
+@form-select-background-color: #DBDCDD;
+@form-select-border: 1px solid @border-color;
+@form-select-padding: 5px;
+
 // Form inputs
 @input-width: 210px;
 @input-background-color: #EEEEEE;
@@ -66,6 +73,13 @@ form {
     margin-top: 2px;
     padding-top: @text-padding;
     color: @label-text-color;
+  }
+  select {
+      width: @form-select-width;
+	  	padding: @form-select-padding;
+      height: @form-select-height;
+      background-color: @form-select-background-color;
+      border: @form-select-border;
   }
   input[type='file'] {
     width: 316px;
