@@ -52,6 +52,7 @@ class Bet(models.Model):
     n05 = models.IntegerField(max_length=2)
     n06 = models.IntegerField(max_length=2)
     hits = models.IntegerField(max_length=1, blank=True, null=True)
+    stubborns = models.IntegerField(max_length=2, default=0, blank=True, null=True)
 
     class Meta:
         ordering = ['concourse', '-hits']
