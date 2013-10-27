@@ -24,6 +24,17 @@
           });
         }
       });
+
+      $('.stubborns').each(function() {
+        $(this).val($(this).data('stubborn'));
+      }).on('change', function() {
+        var url = 'stubborn/' + $(this).data('pk') + '/' + $(this).val();
+        $.get(url).done(function() {
+          window.location.reload();
+        }).fail(function() {
+          alert(url);
+        });
+      });
     });
   </script>
 {% endblock extrascripts %}
