@@ -6,6 +6,7 @@ urlpatterns = patterns(
     url(r'^$', 'home', name='megasena-home'),
     url(r'^detail/(?P<concourse>\d+)/$', 'detail', name='megasena-detail'),
     url(r'^bets/$', 'bets', name='megasena-bets-list'),
+    url(r'^bets/stubborn/(?P<pk>\d+)/(?P<value>\d)/$', 'change_stubborns'),
     url(r'^create/$', 'create', name='megasena-create-bet'),
     url(r'^update/(?P<concourse>\d+)/$', 'update', name='megasena-update-bet'),
     url(r'^delete/(?P<pk>\d+)/$', 'delete', name='megasena-delete-bet'),

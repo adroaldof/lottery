@@ -109,6 +109,15 @@ def delete(request, pk):
         return HttpResponseRedirect('/megasena/bets')
 
 
+def change_stubborns(request, pk, value):
+    bet = get_object_or_404(Bet, id=pk)
+
+    bet.stubborns = value
+    bet.save()
+
+    return HttpResponseRedirect('/megasena/bets')
+
+
 def check(request, concourse):
     last = Raffle.objects.exclude(n01__isnull=True).aggregate(Max('concourse'))
     if last['concourse__max'] is None or last['concourse__max'] < int(concourse):
