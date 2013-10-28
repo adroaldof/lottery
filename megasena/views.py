@@ -52,13 +52,16 @@ def create(request):
     )
 
     if request.method == 'POST':
-        form = ConcourseForm(request.POST)
+        main_form = ConcourseForm(request.POST)
         formset = Formset(request.POST, request.FILES)
-        if form.is_valid() and formset.is_valid():
-            concourse, s = Concourse.objects.get_or_create(**form.cleaned_data)
+        if main_form.is_valid() and formset.is_valid():
+            concourse, s = Concourse.objects.get_or_create(
+                concourse=main_form.cleaned_data.get('concourse')
+            )
             for form in formset.forms:
                 form = form.save(commit=False)
                 form.concourse = concourse
+                form.stubborns = main_form.cleaned_data.get('stubborns')
                 form.save()
             messages.add_message(
                 request, messages.INFO, _('Bet was successfully added')
@@ -109,22 +112,30 @@ def delete(request, pk):
         return HttpResponseRedirect('/megasena/bets')
 
 
+def change_stubborns(request, pk, value):
+    bet = get_object_or_404(Bet, id=pk)
+
+    bet.stubborns = value
+    bet.save()
+
+    return HttpResponseRedirect('/megasena/bets')
+
+
 def check(request, concourse):
-    last = Raffle.objects.exclude(n01__isnull=True).aggregate(Max('concourse'))
-    if last['concourse__max'] is None or last['concourse__max'] < int(concourse):
-        messages.add_message(
-            request, messages.INFO, _('This concourse was not raffled yet')
-        )
-        return HttpResponseRedirect('/megasena/bets')
-    else:
-        if last['concourse__max'] >= int(concourse):
-            concourse = get_object_or_404(Concourse, concourse=concourse)
-            raffled = concourse.raffle_set.all()
-            bets = concourse.bet_set.all()
-            return TemplateResponse(request, 'megasena/check.html', {
-                'raffled': raffled,
-                'bets': bets
-            })
+    conc = get_object_or_404(Concourse, concourse=concourse)
+    bets = Bet.objects.filter(concourse=conc)
+    concourses = [int(concourse)]
+
+    for bet in bets:
+        for stubborn in range(int(concourse), int(concourse) + bet.stubborns):
+            if stubborn not in concourses:
+                concourses.append(stubborn)
+
+    raffles = Raffle.objects.filter(concourse__in=concourses)
+    return TemplateResponse(request, 'megasena/check.html', {
+        'bets': bets,
+        'raffles': raffles,
+    })
 
 
 def check_all(request):

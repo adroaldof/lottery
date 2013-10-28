@@ -9,6 +9,11 @@
 @border-color: #C4C7C8;
 @border-description: 1px solid @border-color;
 
+// select
+@select-height: 30px;
+@select-background-color: #DBDCDD;
+@select-border: 1px solid @border-color;
+@select-padding: 5px;
 
 table {
   width: @table-width;
@@ -50,7 +55,7 @@ table {
   }
 
   &#table-bets {
-    td:nth-child(6), td:nth-child(8) {
+    td:nth-child(6), td:nth-child(7), td:nth-child(9) {
       border-right: 1px dashed @border-color;
     }
   }
@@ -65,6 +70,13 @@ table {
       font-size: 12px;
       background: @table-head-background-color;
     }
+  }
+
+  select {
+    padding: @select-padding;
+    height: @select-height;
+    background-color: @select-background-color;
+    border: @select-border;
   }
 }
 

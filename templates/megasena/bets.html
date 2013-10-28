@@ -24,6 +24,17 @@
           });
         }
       });
+
+      $('.stubborns').each(function() {
+        $(this).val($(this).data('stubborn'));
+      }).on('change', function() {
+        var url = 'stubborn/' + $(this).data('pk') + '/' + $(this).val();
+        $.get(url).done(function() {
+          window.location.reload();
+        }).fail(function() {
+          alert(url);
+        });
+      });
     });
   </script>
 {% endblock extrascripts %}
@@ -52,6 +63,7 @@
         <th>4&ordm</th>
         <th>5&ordm</th>
         <th>6&ordm</th>
+        <th>{% trans "Stubborn" %}</th>
         <th colspan="2">{% trans "Hits" %}</th>
         <th></th>
         <th>
@@ -75,6 +87,14 @@
       <td>{{ bet.n04 }}</td>
       <td>{{ bet.n05 }}</td>
       <td>{{ bet.n06 }}</td>
+      <td>
+        <select class="stubborns" data-stubborn="{{ bet.stubborns }}" data-pk="{{ bet.id }}">
+          <option value="1">-----</option>
+          <option value="2">Two</option>
+          <option value="4">Four</option>
+          <option value="8">Eight</option>
+        </select>
+      </td>
       <td>{% if bet.hits == None %}-{% else %}{{ bet.hits }}{% endif %}</td>
       <td><span class="check-status {% if bet.hits == None %}none{% else %}{% if bet.hits > 3 and object.hits < 7 %}match{% else %}dont-match{% endif %}{% endif %}"></span></td>
       <td>
