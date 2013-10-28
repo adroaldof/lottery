@@ -122,21 +122,20 @@ def change_stubborns(request, pk, value):
 
 
 def check(request, concourse):
-    last = Raffle.objects.exclude(n01__isnull=True).aggregate(Max('concourse'))
-    if last['concourse__max'] is None or last['concourse__max'] < int(concourse):
-        messages.add_message(
-            request, messages.INFO, _('This concourse was not raffled yet')
-        )
-        return HttpResponseRedirect('/megasena/bets')
-    else:
-        if last['concourse__max'] >= int(concourse):
-            concourse = get_object_or_404(Concourse, concourse=concourse)
-            raffled = concourse.raffle_set.all()
-            bets = concourse.bet_set.all()
-            return TemplateResponse(request, 'megasena/check.html', {
-                'raffled': raffled,
-                'bets': bets
-            })
+    conc = get_object_or_404(Concourse, concourse=concourse)
+    bets = Bet.objects.filter(concourse=conc)
+    concourses = [int(concourse)]
+
+    for bet in bets:
+        for stubborn in range(int(concourse), int(concourse) + bet.stubborns):
+            if stubborn not in concourses:
+                concourses.append(stubborn)
+
+    raffles = Raffle.objects.filter(concourse__in=concourses)
+    return TemplateResponse(request, 'megasena/check.html', {
+        'bets': bets,
+        'raffles': raffles,
+    })
 
 
 def check_all(request):
