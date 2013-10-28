@@ -52,13 +52,16 @@ def create(request):
     )
 
     if request.method == 'POST':
-        form = ConcourseForm(request.POST)
+        main_form = ConcourseForm(request.POST)
         formset = Formset(request.POST, request.FILES)
-        if form.is_valid() and formset.is_valid():
-            concourse, s = Concourse.objects.get_or_create(**form.cleaned_data)
+        if main_form.is_valid() and formset.is_valid():
+            concourse, s = Concourse.objects.get_or_create(
+                concourse=main_form.cleaned_data.get('concourse')
+            )
             for form in formset.forms:
                 form = form.save(commit=False)
                 form.concourse = concourse
+                form.stubborns = main_form.cleaned_data.get('stubborns')
                 form.save()
             messages.add_message(
                 request, messages.INFO, _('Bet was successfully added')
