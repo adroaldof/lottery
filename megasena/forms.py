@@ -7,7 +7,7 @@ from .models import Concourse, Bet
 
 class ConcourseForm(forms.Form):
     STUBBORNS = (
-        ('0', '-----'),
+        ('1', '-----'),
         ('2', 'Two'),
         ('4', 'Four'),
         ('8', 'Eight'),
