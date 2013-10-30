@@ -146,7 +146,7 @@ def check_all(request):
     for bet in bets:
         raffled = Raffle.objects.all()
         last = raffled.aggregate(Max('concourse'))['concourse__max']
-        if bet.hits is None and bet.concourse.concourse <= last:
+        if bet.concourse.concourse <= last:
             curr = raffled.get(concourse=bet.concourse)
             concourses = [
                 curr.n01, curr.n02, curr.n03, curr.n04, curr.n05, curr.n06
