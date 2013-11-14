@@ -24,8 +24,9 @@ Once you've got `Homebrew` you can install the dependencies:
 Download and install [Postgres.app](http://postgresapp.com/).
 Start Postgres app and create the database for Lottery to run:
 
-    /Applications/Postgres.app/Contents/MacOS/bin/createdb -E utf8 -T template0 lottery
-
+	export PATH="/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
+	/Applications/Postgres.app/Contents/MacOS/bin/createdb -E utf8 -T template0 lottery
+	/Applications/Postgres.app/Contents/MacOS/bin/create user lottery with password 'change_here_and_on_settings'
 
 ## Lottery Development Setup
 
