@@ -141,29 +141,38 @@ def check(request, concourse):
 def check_all(request):
     message = _("No luck this time, may be next concourse")
     hits = 0
-    bets = Bet.objects.all()
+    bet_objects = Bet.objects.all()
+    raffle_objects = Raffle.objects.all()
+    last = raffle_objects.aggregate(Max('concourse'))['concourse__max']
 
-    for bet in bets:
-        raffled = Raffle.objects.all()
-        last = raffled.aggregate(Max('concourse'))['concourse__max']
-        if bet.concourse.concourse <= last:
-            curr = raffled.get(concourse=bet.concourse)
-            concourses = [
-                curr.n01, curr.n02, curr.n03, curr.n04, curr.n05, curr.n06
-            ]
-            bets = [bet.n01, bet.n02, bet.n03, bet.n04, bet.n05, bet.n06]
+    for bet_object in bet_objects:
+        bet_object.hits = 0
+        bet_object.save()
+        concourse = bet_object.concourse.concourse
+        for current_bet in range(concourse, concourse+bet_object.stubborns):
+            if current_bet <= last:
+                raffled = raffle_objects.get(concourse=current_bet)
+                raffles = [
+                    raffled.n01, raffled.n02, raffled.n03,
+                    raffled.n04, raffled.n05, raffled.n06
+                ]
+                bets = [
+                    bet_object.n01, bet_object.n02, bet_object.n03,
+                    bet_object.n04, bet_object.n05, bet_object.n06
+                ]
 
-            for s in concourses:
-                for b in bets:
-                    if s == b:
-                        hits += 1
+                for raffled_number in raffles:
+                    for bet_number in bets:
+                        if raffled_number == bet_number:
+                            hits += 1
 
-            bet.hits = hits
-            bet.save()
+                if hits > bet_object.hits:
+                    bet_object.hits = hits
+                    bet_object.save()
 
-            if (hits > 3):
-                message = _("Awesome! You are a lucky person, you won a prize")
-            hits = 0
+                if (hits > 3):
+                    message = _("Awesome! You are the locky one. Congrats!")
+                hits = 0
 
     messages.add_message(request, messages.INFO, message)
     return HttpResponseRedirect('/megasena/bets')
